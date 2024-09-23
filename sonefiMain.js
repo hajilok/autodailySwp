@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-import swapMinato from "./src/minato/swap";
+import swapMinato from "./src/minato/swap.js";
 dotenv.config()
 
 let count = 0;
