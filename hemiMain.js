@@ -15,13 +15,14 @@ const main = async (priv) => {
     if (count < maxCount) {
         try {
             const getSwaphemi = await swapHelmi(priv)
-           if (getSwaphemi === false) {
-            console.log('Error In Helmi Swap')
-           } else if (getSwaphemi.logs[0].transactionHash === undefined) {
-            console.log(`Error From Hemi Rpc chain`)
-           } else {
-            console.log(`Success Daily Swap From hemi https://testnet.explorer.hemi.xyz/tx/${getSwaphemi.logs[0].transactionHash}`)
-           }
+            console.log(getSwaphemi)
+        //    if (getSwaphemi === false) {
+        //     console.log('Error In Helmi Swap')
+        //    } else if (getSwaphemi.logs[0].transactionHash === undefined) {
+        //     console.log(`Error From Hemi Rpc chain`)
+        //    } else {
+        //     console.log(`Success Daily Swap From hemi https://testnet.explorer.hemi.xyz/tx/${getSwaphemi.logs[0].transactionHash}`)
+        //    }
 
             count++;
         } catch (error) {
