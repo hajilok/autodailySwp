@@ -8,7 +8,7 @@ const swapEdu = async (priv) => {
 
         const contractAddress = '0xe745f43775B760958cd34ee83B3ab0c088F74630';
         const contract = new web3.eth.Contract(eduSwap, contractAddress);
-        const amount = web3.utils.toWei('0.0001', 'ether')
+        const amount = web3.utils.toWei('0.01', 'ether')
         
         // Ensure inputs are valid hex strings and correspond to bytes.
         const path = [
@@ -19,6 +19,7 @@ const swapEdu = async (priv) => {
 
         const getAmountOut = await contract.methods.getAmountsOut(amount, path).call()
         const amountOutMin = getAmountOut[getAmountOut.length - 1]
+
 
         const deadline = Math.floor(Date.now() / 1000) + 60 * 40; // Set deadline
 

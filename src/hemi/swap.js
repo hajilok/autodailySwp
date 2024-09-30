@@ -37,7 +37,7 @@ const swapHelmi = async (priv) => {
     const bayar = await web3.eth.sendSignedTransaction(receipt.rawTransaction)
     return bayar
     } catch (error) {
-        return error
+        return false
     }
 }
 

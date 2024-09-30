@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import chalk from 'chalk';
-import swapFeature from './src/eduChain/swap.js';
+import swapEdu from './src/eduChain/swap.js';
 import ora from 'ora';
 
 dotenv.config();
@@ -20,7 +20,7 @@ console.log(chalk.blue(`
 const main = async (priv) => {
   if (count < maxCount) {
     try {
-      const getEdu = await swapFeature(priv)
+      const getEdu = await swapEdu(priv)
       console.log(chalk.green(`Successfully swap from dapps https://eduswap.github.io/webapp/ , txhash :  https://opencampus-codex.blockscout.com/tx/${getEdu.logs[0].transactionHash}`));
       count++;
       countdown(maxCount - count);
