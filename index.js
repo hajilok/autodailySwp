@@ -5,8 +5,8 @@ import autoSwapSonicLabs from './src/sonictestnet/swap.js'
 import swapMinato from './src/minato/swap.js';
 import swapHelmi from './src/hemi/swap.js';
 import swapEdu from './src/eduChain/swap.js';
-
-
+import Pumper from './src/eduChain/pumper.js';
+import trusPad from './src/eduChain/trustPad.js';
 
 
 
@@ -32,9 +32,17 @@ const main = async (priv) => {
             const getSwapMinato = await swapMinato(priv)
             const getSwaphemi = await swapHelmi(priv)
             const getEdu = await swapEdu(priv)
+            const getPumper = await Pumper(priv)
+            const  getTruspad = await trusPad(priv)
             console.log(`Success Daily Swap From Sonic Labs https://testnet.soniclabs.com/tx/${sonicLabs.logs[0].transactionHash}`)
             console.log(`Success Daily Swap From Minato https://explorer-testnet.soneium.org/tx/${getSwapMinato.receipt.logs[0].transactionHash}`)
             console.log(chalk.green(`Successfully swap from dapps https://eduswap.github.io/webapp/ , txhash :  https://opencampus-codex.blockscout.com/tx/${getEdu.logs[0].transactionHash}`));
+            console.log(chalk.green(`Successfully Create Token from dapps https://www.pumper.lol/ , txhash :  https://opencampus-codex.blockscout.com/tx/${getPumper.logs[0].transactionHash}`));
+            console.log(chalk.yellow(`Successfully Create Token from dapps and Lauch from https://www.thrustpad.finance/`))
+            console.log(chalk.yellow(`Token Name : ${getTruspad.contractName}`))
+            console.log(chalk.yellow(`Token Symbol : ${getTruspad.contractSymbol}`))
+           console.log(chalk.yellow(`Token Address : ${getTruspad.contractAddress}`))
+            console.log(chalk.yellow(`tx Hash : https://opencampus-codex.blockscout.com/tx/${getTruspad.receipt}`))
            if (getSwaphemi === false) {
             console.log('Error In Helmi Swap')
            } else if (getSwaphemi.logs[0].transactionHash === undefined) {

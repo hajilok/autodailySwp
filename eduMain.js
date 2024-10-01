@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 import chalk from 'chalk';
 import swapEdu from './src/eduChain/swap.js';
 import ora from 'ora';
+import Pumper from './src/eduChain/pumper.js';
+import trusPad from './src/eduChain/trustPad.js';
 
 dotenv.config();
 let count = 0;
@@ -20,8 +22,16 @@ console.log(chalk.blue(`
 const main = async (priv) => {
   if (count < maxCount) {
     try {
+       const getTruspad = await trusPad(priv)
       const getEdu = await swapEdu(priv)
+      const getPumper = await Pumper(priv)
       console.log(chalk.green(`Successfully swap from dapps https://eduswap.github.io/webapp/ , txhash :  https://opencampus-codex.blockscout.com/tx/${getEdu.logs[0].transactionHash}`));
+      console.log(chalk.green(`Successfully Create Token from dapps https://www.pumper.lol/ , txhash :  https://opencampus-codex.blockscout.com/tx/${getPumper.logs[0].transactionHash}`));
+      console.log(chalk.yellow(`Successfully Create Token from dapps and Lauch from https://www.thrustpad.finance/`))
+      console.log(chalk.yellow(`Token Name : ${getTruspad.contractName}`))
+      console.log(chalk.yellow(`Token Symbol : ${getTruspad.contractSymbol}`))
+      console.log(chalk.yellow(`Token Address : ${getTruspad.contractAddress}`))
+      console.log(chalk.yellow(`tx Hash : https://opencampus-codex.blockscout.com/tx/${getTruspad.receipt}`))
       count++;
       countdown(maxCount - count);
     } catch (error) {
